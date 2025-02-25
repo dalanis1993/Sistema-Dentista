@@ -10,12 +10,7 @@ use CodeIgniter\Router\RouteCollection;
  * Router Setup
  *-----------------
  */
-$routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Dashboard');
-$routes->setDefaultMethod('index');
-//$routes->setTranslateURIDashes(false);
-$routes->set404Override();
-$routes->setAutoRoute(true);
+
 
 
 
@@ -30,3 +25,5 @@ $routes->get('register', '\App\Controllers\RegisterController::registerView');
 $routes->post('register', '\App\Controllers\RegisterController::registerAction');
 $routes->post('login', '\App\Controllers\LoginController::loginAction');
 $routes->get('logout', '\App\Controllers\LoginController::logoutAction');
+$routes->resource('categories');
+
