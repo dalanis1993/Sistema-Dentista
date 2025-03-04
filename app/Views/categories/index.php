@@ -2,11 +2,10 @@
 
 <?= $this->section('content') ?>
 
-
 <div class="col p-3">
     <div class="card mb-4">
         <div class="card-header">
-            <h3 class="card-title">Bordered Table</h3>
+            <h3 class="card-title">Lista de Categorias</h3>
             <a href="<?= base_url('categories/new') ?>">
                 <button type="button" class="btn btn-primary btn-block" style="float: right;">Add</button>
             </a>
@@ -34,21 +33,20 @@
                             <td><i data-bs-toggle="tooltip" data-bs-placement="top" title="<?= esc($category['name_icon']); ?>" class="fa <?= esc($category['tag']); ?>"></i></td>
 
                             <td>
-                                <a href="<?= site_url('categories/edit/' . $category['id']); ?>"
+                                <a href="<?= base_url('categories/' . $category['id']. '/edit'); ?>"
                                     class="btn btn-warning btn-sm"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
                                     title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="<?= site_url('categories/delete/' . $category['id']); ?>"
-                                    class="btn btn-danger btn-sm"
-                                    onclick="return confirm('¿Estás seguro de eliminar esta categoría?');"
+                                <button class="btn btn-danger btn-sm delete-category-button"
+                                    data-id="<?= $category['id']; ?>"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
                                     title="Eliminar">
                                     <i class="fas fa-trash-alt"></i>
-                                </a>
+                                </button>                              
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -70,6 +68,7 @@
 
 </div>
 
-
-
+<?= $this->endSection() ?>
+<?= $this->section('js') ?>
+<script src="<?= base_url("js/categories/category_index.js") ?>"></script>
 <?= $this->endSection() ?>

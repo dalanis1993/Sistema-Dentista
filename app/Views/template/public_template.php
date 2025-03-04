@@ -3,7 +3,7 @@
   <!--begin::Head-->
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>AdminLTE 4 | Register Page</title>
+    <title>FINANZAS PERSONALES | Ingreso Finanzas</title>
     <!--begin::Primary Meta Tags-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="title" content="AdminLTE 4 | Register Page" />
@@ -48,6 +48,7 @@
   <!--end::Head-->
   <!--begin::Body-->
   <body class="register-page bg-body-info">
+
   <?= $this->renderSection('content');?>
 
     <!--begin::Third Party Plugin(OverlayScrollbars)-->

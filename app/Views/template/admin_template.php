@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>AdminLTE v4 | Dashboard</title>
+  <title>FINANZAS PERSONALES</title>
   <!--begin::Primary Meta Tags-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="title" content="AdminLTE v4 | Dashboard" />
@@ -46,17 +46,19 @@
   <link rel="stylesheet" href="../../dist/css/adminlte.css" />
   <!--end::Required Plugin(AdminLTE)-->
   <!-- apexcharts -->
-  <link
+  <!-- <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css"
     integrity="sha256-4MX+61mt9NVvvuPjUWdUdyfZfxSB1/Rf9WtqRHgG5S0="
     crossorigin="anonymous" />
-  <!-- jsvectormap -->
+ -->  <!-- jsvectormap -->
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css"
     integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4="
     crossorigin="anonymous" />
+
+  <?= $this->renderSection('css'); ?>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -269,7 +271,7 @@
             class="brand-image opacity-75 shadow" />
           <!--end::Brand Image-->
           <!--begin::Brand Text-->
-          <span class="brand-text fw-light">AdminLTE 4</span>
+          <span class="brand-text fw-light">Finanzas Personales</span>
           <!--end::Brand Text-->
         </a>
         <!--end::Brand Link-->
@@ -292,13 +294,33 @@
               </a>
             </li>
 
-            <li class="nav-header">MULTI LEVEL EXAMPLE</li>
+            <li class="nav-item">
+              <a href="<?= base_url('categories') ?>" class="nav-link">
+                <i class="nav-icon bi bi-star-half"></i>
+                <p>Icono</p>
+              </a>
+            </li>
+
+            <li class="nav-header">MOVIMIENTOS...</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon bi bi-circle-fill"></i>
-                <p>Level 1</p>
+                <p>Ingreso</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon bi bi-circle-fill"></i>
+                <p>Gasto</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon bi bi-circle-fill"></i>
+                <p>Tranferencia</p>
+              </a>
+            </li>
+            
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon bi bi-circle-fill"></i>
@@ -466,12 +488,12 @@
     });
   </script>
   <!-- apexcharts -->
-  <script
+  <!-- <script
     src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.min.js"
     integrity="sha256-+vh8GkaU7C9/wbSLIcwq82tQ2wTf44aOHA8HlBMwRI8="
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script> -->
   <!-- ChartJS -->
-  <script>
+  <!-- <script>
     // NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
     // IT'S ALL JUST JUNK FOR DEMO
     // ++++++++++++++++++++++++++++++++++++++++++
@@ -527,7 +549,7 @@
       sales_chart_options,
     );
     sales_chart.render();
-  </script>
+  </script> -->
   <!-- jsvectormap -->
   <script
     src="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/js/jsvectormap.min.js"
@@ -538,7 +560,7 @@
     integrity="sha256-XPpPaZlU8S/HWf7FZLAncLg2SAkP8ScUTII89x9D3lY="
     crossorigin="anonymous"></script>
   <!-- jsvectormap -->
-  <script>
+  <!-- <script>
     const visitorsData = {
       US: 398, // USA
       SA: 400, // Saudi Arabia
@@ -637,9 +659,27 @@
 
     const sparkline3 = new ApexCharts(document.querySelector('#sparkline-3'), option_sparkline3);
     sparkline3.render();
-  </script>
+  </script> -->
   <!--end::Script-->
-  <script type="text/javascript" src="libs\jquery-3.7.1.js"></script>
+  <script type="text/javascript">
+    var base_url = "<?= base_url() ?>";
+    var csrf = "<?= csrf_hash() ?>"; //tokken 
+  </script>
+  <!-- <script type="text/javascript" src="libs\jquery-3.7.1.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="<?= base_url('js/utils/SwalHandler.js') ?>"></script>
+  <script>
+        $(document).ready(function() {
+            $('.needs-validation').on('submit', function(event) {
+                if (!this.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                $(this).addClass('was-validated');
+            });
+        });
+    </script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
@@ -650,6 +690,7 @@
   </script>
 
   <?= $this->renderSection('js'); ?>
+
 </body>
 <!--end::Body-->
 

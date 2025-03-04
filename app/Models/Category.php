@@ -13,7 +13,9 @@ class Category extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'name', 'color' ,'icon_id'
+        'name',
+        'color',
+        'icon_id'
     ];
 
     protected bool $allowEmptyInserts = false;
@@ -46,13 +48,19 @@ class Category extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    
+
     public function getCategoriesWithIcons()
     {
         return $this->select('categories.*, icons.tag, icons.name as name_icon')
-                    ->join('icons', 'categories.icon_id = icons.id')
-                    ->findAll();
+            ->join('icons', 'categories.icon_id = icons.id')
+            ->findAll();
     }
 
-
+    public function getCategoryWithIcon($id)
+    {
+        return $this->select('categories.*, icons.tag, icons.name as name_icon')
+            ->join('icons', 'categories.icon_id = icons.id')
+            ->where('categories.id', $id)
+            ->first();
+    }
 }

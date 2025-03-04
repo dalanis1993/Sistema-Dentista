@@ -7,9 +7,9 @@
 <?= $this->section('content') ?>
 <div class="card card-outline m-3">
     <div class="card-header">
-        <div class="card-title">Crear Categoria</div>
+        <div class="card-title">Editar Categoria</div>
     </div>
-    <form action="<?= base_url('categories') ?>" method="post" class="needs-validation" novalidate>
+    <form  id="edit-category-form" class="needs-validation" data-id="<?= $category['id'] ?>" novalidate>
         <?= $this->include('categories/fields') ?>
     </form>
 </div>
@@ -17,5 +17,5 @@
 
 <?= $this->section('js') ?>
 <script src="<?= base_url("js/categories/category_utils.js") ?>"></script>
-<script src="<?= base_url("js/categories/category_new.js") ?>"></script>
+<script src="<?= base_url("js/categories/category_edit.js") ?>"></script>
 <?= $this->endSection() ?>

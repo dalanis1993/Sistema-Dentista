@@ -1,0 +1,111 @@
+warning: in the working copy of 'app/Controllers/Categories.php', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/app/Controllers/Categories.php b/app/Controllers/Categories.php[m
+[1mindex b09d891..20af5a9 100644[m
+[1m--- a/app/Controllers/Categories.php[m
+[1m+++ b/app/Controllers/Categories.php[m
+[36m@@ -5,6 +5,7 @@[m [mnamespace App\Controllers;[m
+ use App\Controllers\BaseController;[m
+ use App\Models\Category;[m
+ use App\Models\Icon;[m
+[32m+[m[32muse CodeIgniter\CLI\Console;[m
+ use CodeIgniter\HTTP\ResponseInterface;[m
+ [m
+ class Categories extends BaseController[m
+[36m@@ -14,40 +15,78 @@[m [mclass Categories extends BaseController[m
+ [m
+     public function __construct()[m
+     {[m
+[31m-       $this->categoryModel = new Category();[m
+[31m-       $this->iconModel = new Icon();[m
+[32m+[m[32m        $this->categoryModel = new Category();[m
+[32m+[m[32m        $this->iconModel = new Icon();[m
+     }[m
+ [m
+     public function index()[m
+     {[m
+         $data['categories'] = $this->categoryModel->getCategoriesWithIcons();[m
+ [m
+[31m-       return view('categories/index', $data);[m
+[32m+[m[32m        return view('categories/index', $data);[m
+     }[m
+ [m
+     public function new()[m
+     {[m
+         $data['icons'] = $this->iconModel->findAll();[m
+[31m-        return view('categories/new',$data);[m
+[32m+[m[32m        return view('categories/new', $data);[m
+     }[m
+ [m
+     public function create()[m
+     {[m
+[31m-        var_dump($this->request->getPost());[m
+[31m-       $data = [[m
+[31m-        'name' => $this->request->getPost('nombre_categoria'),[m
+[31m-        'color' => $this->request->getPost('color'),[m
+[31m-        'icon_id' => $this->request->getPost('selectedIcon'),[m
+[31m-    ];[m
+[31m-[m
+[31m-[m
+[31m-       // Intentamos insertar los datos[m
+[31m-       if ($this->categoryModel->insert($data)) {[m
+[31m-           return redirect()->to('/categories'); // Redirigir a la lista de categorías[m
+[31m-       } else {[m
+[31m-           // Si no se pudo insertar, podemos mostrar un error[m
+[31m-           return redirect()->back()->with('error', 'Hubo un problema al guardar los datos.');[m
+[31m-       }[m
+[32m+[m[32m        $data = [[m
+[32m+[m[32m            'name' => $this->request->getPost('nombre_categoria'),[m
+[32m+[m[32m            'color' => $this->request->getPost('color'),[m
+[32m+[m[32m            'icon_id' => $this->request->getPost('selectedIcon'),[m
+[32m+[m[32m        ];[m
+[32m+[m
+[32m+[m[32m        if ($this->categoryModel->insert($data)) {[m
+[32m+[m[32m            return redirect()->to('/categories');[m
+[32m+[m[32m        } else {[m
+[32m+[m[32m            return redirect()->back()->with('error', 'Hubo un problema al guardar los datos.');[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public function edit($id)[m
+[32m+[m[32m    {[m
+[32m+[m[32m        $data['category']  = $this->categoryModel->getCategoryWithIcon($id);[m
+[32m+[m[32m        $data['icons'] = $this->iconModel->findAll();[m
+[32m+[m
+[32m+[m[32m        return view('categories/edit', $data);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public function update($id)[m
+[32m+[m[32m    {[m
+[32m+[m[32m        $data = $this->request->getRawInput();[m
+[32m+[m[32m        var_dump($data);[m
+[32m+[m[32m        $data = [[m
+[32m+[m[32m            'name' => $this->request->getPost('nombre_categoria'),[m
+[32m+[m[32m            'color' => $this->request->getPost('color'),[m
+[32m+[m[32m            'icon_id' => $this->request->getPost('selectedIcon'),[m
+[32m+[m[32m        ];[m
+[32m+[m
+[32m+[m[32m        if ($this->categoryModel->insert($data)) {[m
+[32m+[m[32m            return redirect()->to('/categories');[m
+[32m+[m[32m        } else {[m
+[32m+[m[32m            return redirect()->back()->with('error', 'Hubo un problema al guardar los datos.');[m
+[32m+[m[32m        }[m
+     }[m
+ [m
+[32m+[m[41m   [m
+[32m+[m[32m    public function delete($id)[m
+[32m+[m[32m    {[m
+[32m+[m[32m        // Verificamos si la categoría existe[m
+[32m+[m[32m        $category = $this->categoryModel->find($id);[m
+[32m+[m
+[32m+[m[32m        if (!$category) {[m
+[32m+[m[32m            return redirect()->to('/categories')->with('error', 'Categoría no encontrada.');[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        // Intentamos eliminar la categoría[m
+[32m+[m[32m        if ($this->categoryModel->delete($id)) {[m
+[32m+[m[32m            return redirect()->to('/categories')->with('success', 'Categoría eliminada con éxito.');[m
+[32m+[m[32m        } else {[m
+[32m+[m[32m            return redirect()->to('/categories')->with('error', 'No se pudo eliminar la categoría.');[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+ }[m

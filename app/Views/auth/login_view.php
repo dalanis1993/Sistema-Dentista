@@ -3,12 +3,12 @@
 <?= $this->section('content') ?>
 <div class="login-box">
       <div class="login-logo">
-        <a href="../index2.html"><b>Admin</b>LTE</a>
+        <a href=""><b>Finanzas</b><b> </b> Personales</a>
       </div>
       <!-- /.login-logo -->
       <div class="card">
         <div class="card-body login-card-body">
-          <p class="login-box-msg">Sign in to start your session</p>
+          <p class="login-box-msg">Iniciar sesión</p>
           <form action="<?= url_to('login') ?>" method="post">
                     <?= csrf_field() ?>
 
